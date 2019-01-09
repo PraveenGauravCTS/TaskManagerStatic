@@ -1,0 +1,70 @@
+<div class="form-horizontal">
+  <div class="form-group">
+    <label class=" col-sm-2" for="taskName">Task:</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="taskName" id="taskName" [(ngModel)]="taskSearch">
+    </div>
+    <label class=" col-sm-2" for="parentTask">Parent Task:</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="parentTask" id="parentTask" [(ngModel)]="parentTaskSearch">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class=" col-sm-1" for="p1">Priority From:</label>
+    <div class="col-sm-2">
+      <input type="number" class="form-control" name="p1" id="p1" [(ngModel)]="priorityFromSearch">
+    </div>
+    <label class=" col-sm-1" for="p2">Priority To:</label>
+    <div class="col-sm-2">
+      <input type="number" class="form-control" name="p2" id="p2" [(ngModel)]="priorityToSearch">
+    </div>
+    <label class=" col-sm-1" for="s">Start Date:</label>
+    <div class="col-sm-2">
+      <input type="date" class="form-control" name="s" id="s" [(ngModel)]="startDateSearch">
+    </div>
+    <label class=" col-sm-1" for="s1">End Date:</label>
+    <div class="col-sm-2">
+      <input type="date" class="form-control" name="s1" id="s1" [(ngModel)]="endDateSearch">
+    </div>
+  </div>
+</div>
+<div class="form-horizontal form-group">
+  <table class="table">
+    <thead>
+      <th>Task</th>
+      <th>Parent Task</th>
+      <th>Priority</th>
+      <th>Start</th>
+      <th>End</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody *ngFor="let task of tasks | filter : taskSearch : parentTaskSearch : priorityFromSearch : priorityToSearch : startDateSearch : endDateSearch">
+      <tr>
+        <td>
+          <div class="jumbotron">{{task.taskName}}</div>
+        </td>
+        <td>
+          <div class="jumbotron">{{task.parentTask}}</div>
+        </td>
+        <td>
+          <div>{{task.priority}}</div>
+        </td>
+        <td>
+          <div>{{task.startDate | date:'dd/MM/yyyy'}}</div>
+        </td>
+        <td>
+          <div>{{task.endDate | date:'dd/MM/yyyy'}}</div>
+        </td>
+        <td>
+          <input type="button" value="Edit" style="background:grey ;font-weight:bolder" class="btn form-control button"
+            (click)="redirect(task.taskId)">
+        </td>
+        <td>
+          <input type="button" value="End Task" style="background:grey ;font-weight:bolder" class="btn form-control button"
+            (click)="endTask(task)">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
